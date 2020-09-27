@@ -17,7 +17,7 @@ class Create extends React.Component {
       name: this.state.name,
       age: this.state.age,
     };
-    let response = await fetch("http://localhost:3000/users", {
+    let response = await fetch("https://reactusers.herokuapp.com/users", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

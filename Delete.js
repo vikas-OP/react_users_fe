@@ -10,7 +10,7 @@ class Delete extends React.Component {
   }
   deleteUser = async () => {
     let response = await fetch(
-      `http://localhost:3000/users/${this.state.name}`,
+      `https://reactusers.herokuapp.com/users/${this.state.name}`,
       {
         method: "DELETE",
       }
@@ -26,7 +26,7 @@ class Delete extends React.Component {
     this.updateData();
   }
   updateData = async () => {
-    let response = await fetch("http://localhost:3000/users");
+    let response = await fetch("https://reactusers.herokuapp.com/users");
     response = await response.json();
     response = response.data;
     response = response.map((val) => val.name);
