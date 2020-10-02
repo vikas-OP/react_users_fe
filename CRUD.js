@@ -8,22 +8,29 @@ class CRUD extends React.Component {
   constructor() {
     super();
     this.state = {
-      read: true,
+      data: [],
     };
   }
-  updateRead = () => {
-    this.setState(({ read }) => {
-      return { read: !read };
-    });
-  };
 
+  componentDidMount() {
+    this.updateRead();
+  }
+
+  updateRead = async () => {
+    let response = await fetch("https://reactusers.herokuapp.com/users");
+    response = await response.json();
+    response = response.data;
+    console.log(response);
+    this.setState({ data: response });
+    console.log(this.state.data);
+  };
   render() {
     return (
       <>
         <Create changeRead={this.updateRead} />
-        <Read shouldRead={this.state.read} />
-        <Update changeRead={this.updateRead} shouldRead={this.state.read} />
-        <Delete changeRead={this.updateRead} shouldRead={this.state.read} />
+        <Read data={this.state.data} />
+        <Update changeRead={this.updateRead} data={this.state.data} />
+        <Delete changeRead={this.updateRead} data={this.state.data} />
       </>
     );
   }

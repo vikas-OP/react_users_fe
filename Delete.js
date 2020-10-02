@@ -4,8 +4,7 @@ class Delete extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reRender: this.props.shouldRead,
-      data: [],
+      data: this.props.data,
     };
   }
   deleteUser = async () => {
@@ -19,23 +18,10 @@ class Delete extends React.Component {
     alert(response.message);
     this.props.changeRead();
   };
-  componentDidUpdate() {
-    this.updateData();
-  }
-  componentDidMount() {
-    this.updateData();
-  }
-  updateData = async () => {
-    let response = await fetch("https://reactusers.herokuapp.com/users");
-    response = await response.json();
-    response = response.data;
-    response = response.map((val) => val.name);
-    this.setState({ data: response });
-  };
   render() {
-    const options = this.state.data.map((val) => (
-      <option key={val} value={val}>
-        {val}
+    const options = this.props.data.map((val) => (
+      <option key={val.name} value={val.name}>
+        {val.name}
       </option>
     ));
     return (
